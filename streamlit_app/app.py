@@ -24,7 +24,7 @@ st.set_page_config(
 sys.path.append(str(Path(__file__).parent))
 
 # Import functions from other files
-from src.pages.homepage import homepage
+from .src.pages.homepage import homepage
 from src.pages.dataset_statistics import dataset_statistics
 from src.pages.player_information import player_information
 from src.pages.team_information import team_information
