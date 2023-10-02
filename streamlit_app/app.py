@@ -4,6 +4,7 @@ import sys
 import os
 import pickle
 import time
+import joblib
 
 # start_time = time.time()
 
@@ -57,7 +58,10 @@ def load_in_arima_models(path_to_arima = r'/backend_functions/'):
     models = {}
     for file in all_files:
         #models[file] = pickle.load(open(path_to_arima/file, "rb")) #2.9282 sec
-        models[file] = pickle.load(open(os.path.join(path_to_arima, file), "rb")) #1.2565 sec#
+        #models[file] = pickle.load(open(os.path.join(path_to_arima, file), "rb")) #1.2565 sec#
+        
+        models[file] = joblib.load(open(os.path.join(path_to_arima, file), "rb"))
+
     return models
 
 # Define a function to get a player by name from the teams dictionary
