@@ -20,17 +20,21 @@ st.set_page_config(
     }
 )
 
-# Add the parent directory to the sys.path to import from other files in the project
-sys.path.append(str(Path(__file__).parent))
+# Add the parent directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Import functions from other files
-from .src.pages.homepage import homepage
+
+
+
+# Import modules using relative imports
+from src.pages.homepage import homepage
 from src.pages.dataset_statistics import dataset_statistics
 from src.pages.player_information import player_information
 from src.pages.team_information import team_information
 from src.pages.team_information_db import team_information_db
 from src.pages.gps_information import gps_information
 from src.pages.player_gps_report import player_gps_report
+
 
 # Set the paths to the pickled data
 path_to_teams = Path(__file__).parent / "data" / "pickles" / "teams.pkl"
