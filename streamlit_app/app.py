@@ -40,8 +40,8 @@ from src.pages.player_gps_report import player_gps_report
 #path_to_teams = Path(__file__).parent / "data"/"pickles" / "teams.pkl"
 #path_to_models = Path(__file__).parent / "data"/"pickles" / "arima"
 # Set the paths to the pickled data
-path_to_teams = Path("/mount/src/soccer-dashboard-patch-september/streamlit_app/data/pickles/teams.pkl")
-path_to_models = Path("/mount/src/soccer-dashboard-patch-september/streamlit_app/data/pickles/arima")
+path_to_teams = Path("data/pickles/teams.pkl")
+path_to_models = Path("data/pickles/arima")
 
 
 # Define a function to load pickled data from a file
