@@ -57,10 +57,8 @@ def load_in_arima_models(path_to_arima = r'/backend_functions/'):
     all_files = os.listdir(path_to_arima)
     models = {}
     for file in all_files:
-        #models[file] = pickle.load(open(path_to_arima/file, "rb")) #2.9282 sec
+        models[file] = pickle.load(open(path_to_arima/file, "rb")) #2.9282 sec
         #models[file] = pickle.load(open(os.path.join(path_to_arima, file), "rb")) #1.2565 sec#
-        
-        models[file] = joblib.load(open(os.path.join(path_to_arima, file), "rb"))
 
     return models
 
