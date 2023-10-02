@@ -37,8 +37,8 @@ from src.pages.player_gps_report import player_gps_report
 
 
 # Set the paths to the pickled data
-path_to_teams = Path(__file__).parent / "data/pickles" / "teams.pkl"
-path_to_models = Path(__file__).parent / "data/pickles" / "arima"
+path_to_teams = Path(__file__).parent / "data"/"pickles" / "teams.pkl"
+path_to_models = Path(__file__).parent / "data"/"pickles" / "arima"
 
 # Define a function to load pickled data from a file
 @st.cache_data(ttl=600)
