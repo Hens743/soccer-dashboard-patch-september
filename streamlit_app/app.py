@@ -37,14 +37,21 @@ from src.pages.player_gps_report import player_gps_report
 path_to_teams = Path("data/pickles/teams.pkl")
 path_to_models = Path("src/utils")
 
+def load_in_pickles(path_to_data):
+    try:
+        with open(path_to_data, 'rb') as file:
+            return pickle.load(file)
+    except Exception as e:
+        st.error(f"Error loading {path_to_data}: {e}")
+
 # Define a function to load pickled data from a file
 @st.cache(ttl=600)
-def load_in_pickles(path_to_data: Path):
-    if os.path.exists(path_to_data):
-        with open(path_to_data, 'rb') as file:
-            return pickle.load(file, protocol=2)
-    else:
-        st.error(f"Error: File '{path_to_data}' does not exist.")
+#def load_in_pickles(path_to_data: Path):
+#    if os.path.exists(path_to_data):
+#        with open(path_to_data, 'rb') as file:
+#            return pickle.load(file, protocol=2)
+#    else:
+#        st.error(f"Error: File '{path_to_data}' does not exist.")
 
 # Define a function to load in all the ARIMA models from a directory of pickled models
 @st.cache_data(ttl=600)
