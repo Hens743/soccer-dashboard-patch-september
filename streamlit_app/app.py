@@ -19,7 +19,7 @@ st.set_page_config(
 )
 
 # Add the parent directory to the Python path
-##sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Import modules using relative imports
 from src.pages.homepage import homepage
