@@ -4,9 +4,6 @@ import sys
 import os
 import pickle
 import time
-import joblib
-
-# start_time = time.time()
 
 # configuration of the page
 st.set_page_config(
@@ -24,9 +21,6 @@ st.set_page_config(
 # Add the parent directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-
-
-
 # Import modules using relative imports
 from src.pages.homepage import homepage
 from src.pages.dataset_statistics import dataset_statistics
@@ -36,14 +30,12 @@ from src.pages.team_information_db import team_information_db
 from src.pages.gps_information import gps_information
 from src.pages.player_gps_report import player_gps_report
 
-
 # Set the paths to the pickled data
 #path_to_teams = Path(__file__).parent / "data"/"pickles" / "teams.pkl"
 #path_to_models = Path(__file__).parent / "data"/"pickles" / "arima"
 # Set the paths to the pickled data
 path_to_teams = Path("data/pickles/teams.pkl")
 path_to_models = Path("src/utils")
-
 
 # Define a function to load pickled data from a file
 @st.cache_data(ttl=600)
@@ -57,7 +49,7 @@ def load_in_pickles(path_to_data: Path):
 #    all_files = os.listdir(path_to_arima)
 #    models = {}
 #    for file in all_files:
-#        #models[file] = pickle.load(open(path_to_arima/file, "rb")) #2.9282 sec
+
 #        models[file] = pickle.load(open(os.path.join(path_to_arima, file), "rb")) #1.2565 sec#
 #
 #    return models
@@ -74,8 +66,6 @@ def load_in_arima_models(path_to_arima='/backend_functions/'):
             print(f"Error loading {file}: {e}")
 
     return models
-
-
 
 # Define a function to get a player by name from the teams dictionary
 def get_player(teams, player_name): 
@@ -106,6 +96,3 @@ if selected_page == "Player Information" or selected_page == "Team Information":
 else:
     page_names_to_funcs[selected_page]()
 
-# Evaluate code time
-# end_time = time.time()
-# Homepage = st.write("Time taken:", end_time - start_time, "seconds")
