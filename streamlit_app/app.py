@@ -37,6 +37,8 @@ from src.pages.player_gps_report import player_gps_report
 path_to_teams = Path("data/pickles/teams.pkl")
 path_to_models = Path("src/utils")
 
+# Define a function to load pickled data from a file
+@st.cache_data(ttl=600)
 def load_in_pickles(path_to_data):
     try:
         with open(path_to_data, 'rb') as file:
@@ -45,7 +47,7 @@ def load_in_pickles(path_to_data):
         st.error(f"Error loading {path_to_data}: {e}")
 
 # Define a function to load pickled data from a file
-@st.cache(ttl=600)
+#@st.cache_data(ttl=600)
 #def load_in_pickles(path_to_data: Path):
 #    if os.path.exists(path_to_data):
 #        with open(path_to_data, 'rb') as file:
