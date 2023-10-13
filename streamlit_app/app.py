@@ -19,7 +19,7 @@ st.set_page_config(
 )
 
 # Add the parent directory to the Python path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+##sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Import modules using relative imports
 from src.pages.homepage import homepage
@@ -38,10 +38,13 @@ path_to_teams = Path("data/pickles/teams.pkl")
 path_to_models = Path("src/utils")
 
 # Define a function to load pickled data from a file
-@st.cache_data(ttl=600)
+@st.cache(ttl=600)
 def load_in_pickles(path_to_data: Path):
-    print(path_to_data)
-    return pickle.load(open(path_to_data, "rb"))
+    if os.path.exists(path_to_data):
+        with open(path_to_data, 'rb') as file:
+            return pickle.load(file)
+    else:
+        st.error(f"Error: File '{path_to_data}' does not exist.")
 
 # Define a function to load in all the ARIMA models from a directory of pickled models
 @st.cache_data(ttl=600)
