@@ -42,7 +42,7 @@ path_to_models = Path("src/utils")
 def load_in_pickles(path_to_data: Path):
     if os.path.exists(path_to_data):
         with open(path_to_data, 'rb') as file:
-            return pickle.load(file)
+            return pickle.load(file, protocol=2)
     else:
         st.error(f"Error: File '{path_to_data}' does not exist.")
 
