@@ -53,14 +53,29 @@ def load_in_pickles(path_to_data: Path):
 
 # Define a function to load in all the ARIMA models from a directory of pickled models
 @st.cache_data(ttl=600)
-def load_in_arima_models(path_to_arima = r'/backend_functions/'):
+#def load_in_arima_models(path_to_arima = r'/backend_functions/'):
+#    all_files = os.listdir(path_to_arima)
+#    models = {}
+#    for file in all_files:
+#        #models[file] = pickle.load(open(path_to_arima/file, "rb")) #2.9282 sec
+#        models[file] = pickle.load(open(os.path.join(path_to_arima, file), "rb")) #1.2565 sec#
+#
+#    return models
+
+def load_in_arima_models(path_to_arima='/backend_functions/'):
     all_files = os.listdir(path_to_arima)
     models = {}
     for file in all_files:
-        #models[file] = pickle.load(open(path_to_arima/file, "rb")) #2.9282 sec
-        models[file] = pickle.load(open(os.path.join(path_to_arima, file), "rb")) #1.2565 sec#
+        file_path = os.path.join(path_to_arima, file)
+        try:
+            with open(file_path, 'rb') as f:
+                models[file] = pickle.load(f)
+        except Exception as e:
+            print(f"Error loading {file}: {e}")
 
     return models
+
+
 
 # Define a function to get a player by name from the teams dictionary
 def get_player(teams, player_name): 
