@@ -1,5 +1,4 @@
 import pandas as pd
-import mysql.connector
 import streamlit as st
 import plotly.express as px
 import datetime
@@ -8,54 +7,25 @@ import time
 from haversine import haversine, Unit
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-import src.utils.queries as qu
-#start_time = time.time()
+import requests
 
-# Connect to MySQL server
-# Uses st.cache_resource to only run once.
-#@st.cache_resource# doesn't work
+# URL of the raw data file in the GitHub repository
+data_url = 'https://raw.githubusercontent.com/username/repository/branch/filename.csv'
 
-conn = qu.conn
-# Execute MySQL query
-# Uses st.cache_data to only rerun when the query changes or after 10 min.
-#@st.cache_data(ttl=60)# doesn't work
-def execute_query(query, params=None):
-    
-    cursor = conn.cursor()
-    cursor.execute(query, params)
-    result = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return result
+# Fetch data from GitHub
+response = requests.get(data_url)
 
-# MySQL connection message
-with st.spinner('Connecting to MySQL server...in a few seconds...'):
-    time.sleep(5)
-
-if conn.is_connected():
-    st.success('Connected to MySQL server!')
+if response.status_code == 200:
+    # Read data into pandas DataFrame
+    dataset = pd.read_csv(data_url)
 
 else:
-    st.warning("Failed to connect to MySQL server.", icon="🚨") 
+    st.error(f"Failed to fetch data from GitHub. Status code: {response.status_code}")
 
 # Page configuration      
 def player_gps_report():
    
    st.title("Player GPS Report")
-   #tab1= st.tabs(["Player GPS Report" ])  
-   
-   # Connection to DB
-   dataset = pd.read_sql(qu.dataset, conn)
-   df_team_A = pd.read_sql(qu.df_team_A, conn)
-   df_team_B = pd.read_sql(qu.df_team_B, conn)
-   Players_list = dataset
-   # names = pd.read_sql("SELECT DISTINCT player_name FROM gps",conn)
-
-   # KPI
-   # Calculate distance btw gps coordinates and create new column ['distance']
-   # dataset['distance'] = dataset.apply(lambda row: haversine((row['lat'], row['lon']), (row['lat'], row['lon']), unit=Unit.METERS), axis=1)
-   # Error: Unrecognized type: "Duration" (18)
-
    st.write("")
    st.write("Select players to be compared:")
 
