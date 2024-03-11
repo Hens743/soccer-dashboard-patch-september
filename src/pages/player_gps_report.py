@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 import requests
 
 # URL of the raw data file in the GitHub repository
-data_url = 'https://raw.githubusercontent.com/username/repository/branch/filename.csv'
+data_url = 'data/pickles/arima'
 
 # Fetch data from GitHub
 response = requests.get(data_url)
